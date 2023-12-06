@@ -7,15 +7,14 @@ const { MongoClient } = require("mongodb");
 
 const uri = process.env.MONGO_URI;
 
-const client = new MongoClient(uri);
+let client: typeof MongoClient
 
-async function connect() {
-  try {
-    const database = client.db('cOlx');
+export const getMongoClientInstance = async () => {
+  if(!client){
+    client = new MongoClient(uri);
+    await client.connect()
+  }  
 
-    return database
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
+  return client
+  
+ }  
