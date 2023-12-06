@@ -3,7 +3,15 @@ import Link from "next/link"
 export default function Login() {
     return (
         <>
-        
+            <div className="navbar bg-gray-100">
+                <div>
+                    <div className="flex-1 pl-4">
+                        <Link href="/">
+                            <Image src="/images/logoC02.png" alt="cOlx" width={50} height={50} />
+                        </Link>
+                    </div>
+                </div>
+            </div>
             <div className="flex items-center justify-center pt-10">
                 <Image src="/images/logoC02.png" alt="cOlx" width={300} height={300} />
             </div>
@@ -31,7 +39,6 @@ export default function Login() {
                     </div>
                 </div>
             </form>
-            
         </>
     )
 }

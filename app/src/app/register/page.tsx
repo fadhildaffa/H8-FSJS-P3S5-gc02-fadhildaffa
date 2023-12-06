@@ -3,8 +3,16 @@ import Link from "next/link"
 export default function Register() {
     return (
         <>
-        
-            <div className="flex items-center justify-center">
+            <div className="navbar bg-gray-100">
+                <div>
+                    <div className="flex-1 pl-4">
+                        <Link href="/">
+                            <Image src="/images/logoC02.png" alt="cOlx" width={50} height={50} />
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            <div className="flex items-center justify-center pt-2">
                 <Image src="/images/logoC02.png" alt="cOlx" width={300} height={300} />
             </div>
             <form action="">
@@ -39,7 +47,7 @@ export default function Register() {
                     </div>
                 </div>
             </form>
-            
+
         </>
     )
 }

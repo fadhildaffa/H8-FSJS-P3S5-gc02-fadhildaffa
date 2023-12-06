@@ -7,7 +7,9 @@ export default function Home() {
       <div className="navbar bg-gray-100">
         <div>
           <div className="flex-1 pl-4">
-            <Image src="/images/logoC02.png" alt="cOlx" width={50} height={50} />
+            <Link href="/">
+              <Image src="/images/logoC02.png" alt="cOlx" width={50} height={50} />
+            </Link>
           </div>
         </div>
         <div className="flex justify-center content-center w-screen gap-4">
@@ -23,7 +25,9 @@ export default function Home() {
             </Link>
           </h3>
           <h3 className="font-bold">
-            Daftar
+            <Link href="/register">
+              Daftar
+            </Link>
           </h3>
         </div>
       </div>
