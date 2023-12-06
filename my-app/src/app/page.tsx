@@ -23,12 +23,12 @@ export default function Home() {
           </h3>
         </div>
         <div className="gap-5 mr-10">
-          <h3 className="font-bold" >
+          <h3 className="font-bold underline" >
             <Link href="/login">
               Login
             </Link>
           </h3>
-          <h3 className="font-bold">
+          <h3 className="font-bold underline">
             <Link href="/register">
               Daftar
             </Link>
@@ -59,7 +59,12 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-row gap-5 flex-wrap p-6">
-      <ProductCards/>
+        <ProductCards />
+      </div>
+      <div className="flex justify-center p-5">
+        <Link href="/products">
+          <button className="btn btn-active btn-ghost btn-wide">See All</button>
+        </Link>
       </div>
     </>
   )
