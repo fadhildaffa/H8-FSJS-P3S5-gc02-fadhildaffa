@@ -31,6 +31,29 @@ export default function Home() {
           </h3>
         </div>
       </div>
+      <div className="carousel w-full">
+        <div id="slide1" className="carousel-item relative w-full">
+          <img src="https://media.karousell.com/media/photos/products/2021/12/21/free_ongkir_1640094373_8dd26f0e_progressive.jpg" className="w-full" style={{height: "27rem"}} />
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#slide3" className="btn btn-circle">❮</a>
+            <a href="#slide2" className="btn btn-circle">❯</a>
+          </div>
+        </div>
+        <div id="slide2" className="carousel-item relative w-full">
+          <img src="https://res.cloudinary.com/dlqcki8m5/image/upload/v1701834106/frcfhtrrzl3rjfqardf2.jpg" className="w-full" style={{height: "18rem"}}/>
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#slide1" className="btn btn-circle">❮</a>
+            <a href="#slide3" className="btn btn-circle">❯</a>
+          </div>
+        </div>
+        <div id="slide3" className="carousel-item relative w-full">
+          <img src="https://cdn.pixabay.com/photo/2015/09/20/08/04/megaphone-948015_1280.jpg" className="w-full" style={{height: "18rem"}}/>
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#slide2" className="btn btn-circle">❮</a>
+            <a href="#slide1" className="btn btn-circle">❯</a>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
