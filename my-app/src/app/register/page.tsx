@@ -10,14 +10,14 @@ export type myResponse <T = {}> =  {
 export default function Register() {
 
 
-    const handleRegister = async (formData: FormData) => {
+    const handleLogin = async (formData: FormData) => {
         "use server"
         const name = formData.get('name');
         const username = formData.get('username');
         const email = formData.get('email');
         const password = formData.get('password');
 
-        const response = await fetch("http://localhost:3000/api/users/register", {
+        const response = await fetch("http://localhost:3000/api/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -36,7 +36,7 @@ export default function Register() {
 
         
 
-        return redirect("login")
+        return redirect("/login")
 
     }
     return (
@@ -58,7 +58,7 @@ export default function Register() {
             </div>
             <div className="flex items-center justify-center w-screen pt-5">
                 <div className="flex flex-col items-center justify-center w-96">
-                    <form action={handleRegister}>
+                    <form action={handleLogin}>
                         <div className="flex-col w-full pb-5 ">
                             <label>Name</label>
                             <input type="text" name="name" placeholder="Your name" className="input input-bordered w-full" />
@@ -77,7 +77,7 @@ export default function Register() {
                         </div>
                         <button type="submit" className="btn btn-info w-full mb-5">Register</button>
                     </form>
-                    <div className="flex-col w-full pb-5">
+                    <div className="flex-col w-full pb-5 ml-16">
                         <span>
                             Sudah mempunyai akun?
                         </span>

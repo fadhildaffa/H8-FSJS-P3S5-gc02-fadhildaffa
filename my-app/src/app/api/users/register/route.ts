@@ -41,8 +41,6 @@ export async function POST(request: Request) {
         })
 
     } catch (error) {
-        console.log(error, "<<< ini error")
-
         if (error instanceof z.ZodError) {
             const errPath = error.issues[0].path[0];
             const errMessage = error.issues[0].message;

@@ -1,15 +1,35 @@
 import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
+import { listProduct } from "@/db/models/product"
+
+type Product = {
+    statusCode?: number;
+    message?: string;
+    data?: listProduct[];
+    data1?: listProduct[]
+}
+
+async function getProducts(): Promise<Product> {
+    'use server'
+    const response = await fetch('http://localhost:3000/api/products', {
+        method: 'GET'
+    })
+    const result = await response.json()
+
+    return result
+}
 
 
+export default async function Products() {
+    const { data1 } = await getProducts()
 
-export default function Products() {
-    
     return (
         <>
             <NavbarLogin />
             <div className="flex flex-wrap gap-3 justify-around p-6">
-                {/* <ProductCards /> */}
+                {data1?.map((el, idx) => (
+                    <ProductCards products={el} key={idx} />
+                ))}
             </div>
             <div className="flex justify-end pr-10 pr-56">
                 <div className="join">
@@ -19,7 +39,7 @@ export default function Products() {
                     <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
                 </div>
             </div>
-            
+
         </>
     )
 }

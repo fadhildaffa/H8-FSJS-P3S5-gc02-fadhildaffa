@@ -49,10 +49,10 @@ export const getByEmailAndUsername = async (email: string, username: string) => 
     return user
 }
 
-export const getByUsername = async (username: string) => {
+export const getByEmail= async (email: string) => {
     const db = await getDb();
     const result = (await db.collection(COLLECTION_USER).findOne({
-        username: username
+        email
     })) as userModel;
 
     return result;

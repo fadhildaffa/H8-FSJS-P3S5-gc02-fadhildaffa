@@ -34,3 +34,10 @@ export const getProducts7 = async () => {
 
     return products
 }
+
+export const getProducts = async () => {
+    const db = await getDb();
+    const products = (await db.collection('products').find().toArray()) as listProduct[]
+
+    return products
+}
