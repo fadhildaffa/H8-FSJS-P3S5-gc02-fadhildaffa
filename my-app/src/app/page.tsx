@@ -40,7 +40,7 @@ export default async function Home() {
         </div>
         <div className="flex justify-center content-center w-screen gap-4">
           <input type="text" placeholder="Search" className="input input-bordered w-6/12" />
-          <div className="border-solid border-2 border-zinc-950">
+          <div className="border-solid border-2 border-zinc-950 rounded-full">
             <Image src="/images/search.png" alt="cOlx" width={35} height={35} />
           </div>
           <h3 className="font-bold underline text-sky-400">
