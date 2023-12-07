@@ -20,7 +20,8 @@ export type listProduct = {
     tags: string[];
     thumbnail: string;
     images: string[];
-    createdAt: string
+    createdAt: string;
+    updatedAt: string;
 }
 
 export const getProducts7 = async () => {

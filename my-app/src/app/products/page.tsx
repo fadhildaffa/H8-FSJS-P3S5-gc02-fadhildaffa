@@ -1,4 +1,3 @@
-
 import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
 
@@ -10,7 +9,7 @@ export default function Products() {
         <>
             <NavbarLogin />
             <div className="flex flex-wrap gap-3 justify-around p-6">
-                <ProductCards />
+                {/* <ProductCards /> */}
             </div>
             <div className="flex justify-end pr-10 pr-56">
                 <div className="join">
