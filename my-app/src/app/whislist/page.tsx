@@ -3,6 +3,9 @@ import ProductCards from "../components/ProductCard"
 
 
 export default function () {
+    const data = fetch('http://localhost:3000/api/products')
+    console.log(data)
+
     return (
         <>
             <NavbarLogin />

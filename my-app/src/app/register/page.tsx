@@ -20,15 +20,15 @@ export default function Register() {
                     <div className="flex flex-col items-center justify-center w-96">
                         <div className="flex-col w-full pb-5 ">
                             <label>Name</label>
-                            <input type="text" placeholder="Email" className="input input-bordered w-full" />
+                            <input type="text" placeholder="Your name" className="input input-bordered w-full" />
                         </div>
                         <div className="flex-col w-full pb-5">
                             <label >Username</label>
-                            <input type="text" placeholder="Password" className="input input-bordered w-full" />
+                            <input type="text" placeholder="input username" className="input input-bordered w-full" />
                         </div>
                         <div className="flex-col w-full pb-5 ">
                             <label>Email</label>
-                            <input type="text" placeholder="Email" className="input input-bordered w-full" />
+                            <input type="email" placeholder="Email" className="input input-bordered w-full" />
                         </div>
                         <div className="flex-col w-full pb-5">
                             <label >Password</label>

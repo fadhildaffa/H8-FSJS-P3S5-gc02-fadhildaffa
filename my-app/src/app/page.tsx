@@ -1,8 +1,26 @@
+
 import Image from "next/image"
 import Link from 'next/link'
 import ProductCards from "./components/ProductCard"
+import { useState } from "react"
+
+export type Data <T = []> ={
+      statusCode?: number;
+      message?: string;
+      data?: T
+} 
 
 export default function Home() {
+  // const data = fetch('http://localhost:3000/api/products')
+    // console.log(data, "<<< ini data")
+  async function getProducts (){
+    'use server'
+    const response = await fetch('http://localhost:3000/api/products', {
+      method: 'GET'
+    })
+    const result = (await response.json()) as Response
+  } 
+
   return (
     <>
       <div className="navbar bg-gray-100">
