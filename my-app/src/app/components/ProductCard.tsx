@@ -44,7 +44,7 @@ export default function ProductCards({ products }: Props) {
           <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
         </div>
         <Link href={`/products/${products.slug}`}>
-          <figure><img src={products.thumbnail} alt="Shoes" style={{ height: "15em" }} /></figure>
+          <figure><img src={products.thumbnail} alt={products.name} style={{ height: "15em" }} /></figure>
           <div className="card-body">
             <h2 className="card-title font-bold text-xl">
               {rupiah(products.price)}

@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
         if (user.length > 0) {
             return NextResponse.json({
-                message: "Email/Username already registered"
+                message: "EMAIL/USERNAME ALREADY REGISTERED"
             },
                 {
                     status: 401

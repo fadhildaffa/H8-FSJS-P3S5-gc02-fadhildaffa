@@ -10,9 +10,11 @@ type Product = {
   data?: listProduct[] 
 }
 
+let baseUrl = process.env.BASE_URL as string
+
 async function getProducts(): Promise<Product>{
   'use server'
-  const response = await fetch('http://localhost:3000/api/products?limit=7', {
+  const response = await fetch(baseUrl, {
     method: 'GET',
     cache: 'no-store'
   })
