@@ -1,33 +1,37 @@
+
+import { cookies } from "next/headers";
 import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
+
 import { listProduct } from "@/db/models/product"
 
 type Product = {
     statusCode?: number;
     message?: string;
     data?: listProduct[];
-    data1?: listProduct[]
 }
 
-async function getProducts(): Promise<Product> {
+let baseUrl = process.env.BASE_URL as string
+
+export async function getProducts(): Promise<Product> {
     'use server'
-    const response = await fetch('http://localhost:3000/api/products', {
-        method: 'GET'
+    const response = await fetch(baseUrl+ "/api/products", {
+        method: 'GET',
+        cache: 'no-store'
     })
     const result = await response.json()
 
     return result
 }
 
-
 export default async function Products() {
-    const { data1 } = await getProducts()
+    const { data } = await getProducts()
 
     return (
         <>
             <NavbarLogin />
             <div className="flex flex-wrap gap-3 justify-around p-6">
-                {data1?.map((el, idx) => (
+                {data?.map((el, idx) => (
                     <ProductCards products={el} key={idx} />
                 ))}
             </div>

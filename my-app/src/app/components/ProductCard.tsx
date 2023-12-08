@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link"
 import { FaMagnifyingGlass, FaHeart, FaRegHeart, FaArrowRight } from "react-icons/fa6";
 
@@ -43,8 +44,8 @@ export default function ProductCards({ products }: Props) {
         <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2">
           <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
         </div>
-        <Link href='/products/slug'>
-          <figure><img src={products.thumbnail} alt="Shoes" style={{ height: "15em" }} /></figure>
+        <Link href={`/products/${products.slug}`}>
+          <figure><img src={products.thumbnail} alt={products.name} style={{ height: "15em" }} /></figure>
           <div className="card-body">
             <h2 className="card-title font-bold text-xl">
               {rupiah(products.price)}

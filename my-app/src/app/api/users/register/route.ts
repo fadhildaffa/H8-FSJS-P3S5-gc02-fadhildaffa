@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
         if (user.length > 0) {
             return NextResponse.json({
-                message: "Email/Username already registered"
+                message: "EMAIL/USERNAME ALREADY REGISTERED"
             },
                 {
                     status: 401
@@ -42,12 +42,12 @@ export async function POST(request: Request) {
 
     } catch (error) {
         if (error instanceof z.ZodError) {
-            const errPath = error.issues[0].path[0];
-            const errMessage = error.issues[0].message;
+            const errPath = error.issues[0].path[0] as string;
+            const errMessage = error.issues[0].message.replace("String ", "");
 
             return NextResponse.json(
                 {
-                    message: `${errPath} ${errMessage.toLowerCase()}`
+                    message: `${errPath.toUpperCase()} ${errMessage.toUpperCase()}`
                 },
                 {
                     status: 400

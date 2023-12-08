@@ -7,6 +7,9 @@ export type myResponse <T = {}> =  {
     message?: string;
     data?: T;
 }
+
+let baseUrl = process.env.BASE_URL as string
+
 export default function Register() {
 
 
@@ -17,7 +20,7 @@ export default function Register() {
         const email = formData.get('email');
         const password = formData.get('password');
 
-        const response = await fetch("http://localhost:3000/api/users/login", {
+        const response = await fetch(baseUrl + "/api/users/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

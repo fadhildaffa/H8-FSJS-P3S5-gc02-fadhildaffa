@@ -24,20 +24,23 @@ export type listProduct = {
     updatedAt: string;
 }
 
-export const getProducts7 = async () => {
+
+export const getProducts = async (limit: string) => {
     const db = await getDb();
     const products = (await db.collection('products').aggregate([
         {
-            $limit: 7
+            $limit: Number(limit)
         }
     ]).toArray()) as listProduct[]
 
     return products
 }
 
-export const getProducts = async () => {
+export const getProductSlug = async (slug: string) => {
     const db = await getDb();
-    const products = (await db.collection('products').find().toArray()) as listProduct[]
+    const products = (await db.collection('products').findOne({
+        slug: slug
+    })) as listProduct
 
     return products
 }
