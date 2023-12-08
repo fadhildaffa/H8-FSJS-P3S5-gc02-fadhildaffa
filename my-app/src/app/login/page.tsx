@@ -3,7 +3,8 @@ import Link from "next/link"
 import { ErrorClient } from "../components/ErrorClient";
 import { myResponse } from "../register/page";
 import { redirect } from "next/navigation";
-import { cookies } from 'next/headers'
+import { cookies } from 'next/headers';
+let baseUrl = process.env.BASE_URL as string
 export default function Login() {
 
     const handleLogin = async (formData: FormData) => {
@@ -11,7 +12,7 @@ export default function Login() {
         const email = formData.get("email")
         const password = formData.get("password")
         
-        const response = await fetch("http://localhost:3000/api/users/login", {
+        const response = await fetch(baseUrl + "/api/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

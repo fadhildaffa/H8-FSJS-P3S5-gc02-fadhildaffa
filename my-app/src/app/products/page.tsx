@@ -1,5 +1,8 @@
+
+import { cookies } from "next/headers";
 import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
+
 import { listProduct } from "@/db/models/product"
 
 type Product = {
@@ -8,17 +11,18 @@ type Product = {
     data?: listProduct[];
 }
 
-async function getProducts(): Promise<Product> {
+let baseUrl = process.env.BASE_URL as string
+
+export async function getProducts(): Promise<Product> {
     'use server'
-    const response = await fetch('http://localhost:3000/api/products', {
+    const response = await fetch(baseUrl+ "/api/products", {
         method: 'GET',
-        cache: 'no-store' 
+        cache: 'no-store'
     })
     const result = await response.json()
 
     return result
 }
-
 
 export default async function Products() {
     const { data } = await getProducts()

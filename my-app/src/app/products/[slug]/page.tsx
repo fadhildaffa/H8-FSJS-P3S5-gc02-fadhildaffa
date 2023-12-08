@@ -1,21 +1,24 @@
+
 import NavbarLogin from "@/app/components/NavbarLogin"
 import { listProduct } from "@/db/models/product"
 import { FaMagnifyingGlass, FaHeart, FaRegHeart, FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
+import { cookies } from "next/headers";
 type Product = {
     statusCode?: number;
     message?: string;
     data?: listProduct;
 }
-
+let baseUrl = process.env.BASE_URL as string
 
 export default async function DetailPage({ params }: { params: { slug: string } }) {
     // const { searchParams } = new URL(request.url)
     // const id = searchParams.get('id')
     // console.log(params, "<<< ini ada gk?")
+
     async function getProduct(): Promise<Product> {
         'use server'
-        const response = await fetch(`http://localhost:3000/api/products/${params.slug}`, {
+        const response = await fetch(`${baseUrl}/api/products/${params.slug}`, {
             method: 'GET',
             cache: 'no-store'
         })
@@ -104,7 +107,7 @@ export default async function DetailPage({ params }: { params: { slug: string } 
                         Deskripsi
                     </h2>
                     <hr />
-                    <p className="pt-3">
+                    <p className="py-3">
                         {data?.description}
                     </p>
                 </div>

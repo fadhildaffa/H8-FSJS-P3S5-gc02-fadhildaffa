@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from 'next/link'
 import ProductCards from "./components/ProductCard"
 import { listProduct } from "@/db/models/product"
+import { cookies } from "next/headers"
 
 type Product = {
   statusCode?: number;
@@ -14,7 +15,7 @@ let baseUrl = process.env.BASE_URL as string
 
 async function getProducts(): Promise<Product>{
   'use server'
-  const response = await fetch(baseUrl, {
+  const response = await fetch(baseUrl + "/api/products?limit=7", {
     method: 'GET',
     cache: 'no-store'
   })
