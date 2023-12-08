@@ -35,3 +35,12 @@ export const getProducts = async (limit: string) => {
 
     return products
 }
+
+export const getProductSlug = async (slug: string) => {
+    const db = await getDb();
+    const products = (await db.collection('products').findOne({
+        slug: slug
+    })) as listProduct
+
+    return products
+}

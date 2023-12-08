@@ -1,20 +1,20 @@
 
 import { NextResponse } from "next/server";
+import { getProductSlug } from "@/db/models/product";
 
 
-export async function GET(request: Request) {
+
+export async function GET(request: Request,  { params }: { params: { slug: string } }) {
     try {
-       
-        const { searchParams } = new URL(request.url)
-        const slug = searchParams.get('slug') as string
-        
-        // console.log(limit, "<< limit")
-        // const products = await getProducts7();
+        const slug = params.slug;
+
+        const product = await getProductSlug(slug);
         
         
         return NextResponse.json({
             statusCode: 200,
             message: "message from /api/products/slug",
+            data: product
         },{
             status: 200
         })
