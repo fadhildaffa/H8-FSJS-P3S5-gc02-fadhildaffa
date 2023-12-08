@@ -12,8 +12,9 @@ type Product = {
 
 async function getProducts(): Promise<Product>{
   'use server'
-  const response = await fetch('http://localhost:3000/api/products', {
-    method: 'GET'
+  const response = await fetch('http://localhost:3000/api/products?limit=7', {
+    method: 'GET',
+    cache: 'no-store'
   })
   const result = await response.json()
 

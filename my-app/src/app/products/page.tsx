@@ -6,13 +6,13 @@ type Product = {
     statusCode?: number;
     message?: string;
     data?: listProduct[];
-    data1?: listProduct[]
 }
 
 async function getProducts(): Promise<Product> {
     'use server'
     const response = await fetch('http://localhost:3000/api/products', {
-        method: 'GET'
+        method: 'GET',
+        cache: 'no-store' 
     })
     const result = await response.json()
 
@@ -21,13 +21,13 @@ async function getProducts(): Promise<Product> {
 
 
 export default async function Products() {
-    const { data1 } = await getProducts()
+    const { data } = await getProducts()
 
     return (
         <>
             <NavbarLogin />
             <div className="flex flex-wrap gap-3 justify-around p-6">
-                {data1?.map((el, idx) => (
+                {data?.map((el, idx) => (
                     <ProductCards products={el} key={idx} />
                 ))}
             </div>

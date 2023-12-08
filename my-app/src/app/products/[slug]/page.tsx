@@ -3,10 +3,12 @@ import NavbarLogin from "@/app/components/NavbarLogin"
 
 
 export default function DetailPage() {
+    // const { searchParams } = new URL(request.url)
+    // const id = searchParams.get('id')
     return (
         <>
-        <NavbarLogin/>
-        <div className="p-5">
+            <NavbarLogin />
+            <div className="p-5">
                 <div className="carousel w-full">
                     <div id="slide1" className="carousel-item relative w-full">
                         <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" className="w-full" />
@@ -68,6 +70,6 @@ export default function DetailPage() {
                     </h2>
                 </div>
             </div>
-            </>
+        </>
     )
 } 
