@@ -1,31 +1,12 @@
-
-import { cookies } from "next/headers";
+"use client"
 import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
+import { getProducts } from "@/ssr/products";
 
-import { listProduct } from "@/db/models/product"
-
-type Product = {
-    statusCode?: number;
-    message?: string;
-    data?: listProduct[];
-}
-
-let baseUrl = process.env.BASE_URL as string
-
-export async function getProducts(): Promise<Product> {
-    'use server'
-    const response = await fetch(baseUrl+ "/api/products", {
-        method: 'GET',
-        cache: 'no-store'
-    })
-    const result = await response.json()
-
-    return result
-}
 
 export default async function Products() {
     const { data } = await getProducts()
+    console.log(data, "<<< ada g?")
 
     return (
         <>
