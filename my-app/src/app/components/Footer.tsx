@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function Footer() {
     return (
         <section className='w-full h-32 flex flex-col'>
-            <div className='w-full h-auto flex flex-col gap-8 px-8 py-4' style={{ backgroundColor: "#182c54" }}>
+            <div className='w-full h-auto flex flex-col gap-8 px-2 py-4 bg-sky-400'>
                 <div className='w-full flex flex-row '>
                     <div className=' w-full p-4'>
                         <div className='pb-6'>

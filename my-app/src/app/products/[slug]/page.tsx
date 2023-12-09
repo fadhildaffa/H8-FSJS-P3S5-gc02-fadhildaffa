@@ -30,7 +30,11 @@ export default async function DetailPage({ params }: { params: { slug: string } 
             currency: "IDR"
         }).format(number);
     }
-
+let formatTags = data.tags.map((el, idx) => {
+    return (
+        <span className='font-bold text-md bg-slate-400 rounded-full px-4 py-1 text-black' key={idx}>{el}</span>
+    )
+})
 // console.log(data, "<<< ini data")
 
     return (
@@ -46,6 +50,9 @@ export default async function DetailPage({ params }: { params: { slug: string } 
                     <p>
                         {data?.excerpt}
                     </p>
+                    <div className="flex my-3 gap-4">
+                   {formatTags}
+                    </div>
                     <h2 className="font-bold text-3xl pt-10">
                         Deskripsi
                     </h2>

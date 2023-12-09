@@ -25,9 +25,13 @@ export type listProduct = {
 }
 
 
-export const getProducts = async (limit: string) => {
+export const getProducts = async ({limit, search}:{limit: string, search:string}) => {
+    // console.log(search, "<< from model")
     const db = await getDb();
     const products = (await db.collection('products').aggregate([
+        {
+            $match: { name: { $regex: new RegExp(search, "i") } }
+        },
         {
             $limit: Number(limit)
         }
