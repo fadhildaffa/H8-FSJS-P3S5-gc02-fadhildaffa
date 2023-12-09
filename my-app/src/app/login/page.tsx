@@ -4,7 +4,7 @@ import { ErrorClient } from "../components/ErrorClient";
 import { myResponse } from "../register/page";
 import { redirect } from "next/navigation";
 import { cookies } from 'next/headers';
-let baseUrl = process.env.BASE_URL as string
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 export default function Login() {
 
     const handleLogin = async (formData: FormData) => {

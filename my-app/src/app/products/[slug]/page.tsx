@@ -7,7 +7,8 @@ type Product = {
     message?: string;
     data: listProduct;
 }
-let baseUrl = process.env.BASE_URL as string
+
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 export default async function DetailPage({ params }: { params: { slug: string } }) {
    

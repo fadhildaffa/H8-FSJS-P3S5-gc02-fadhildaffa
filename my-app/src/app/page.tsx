@@ -3,7 +3,6 @@ import Image from "next/image"
 import Link from 'next/link'
 import ProductCards from "./components/ProductCard"
 import { listProduct } from "@/db/models/product"
-import { cookies } from "next/headers"
 
 type Product = {
   statusCode?: number;
@@ -11,7 +10,7 @@ type Product = {
   data?: listProduct[] 
 }
 
-let baseUrl = process.env.BASE_URL as string
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 async function getProducts(): Promise<Product>{
   'use server'
@@ -25,7 +24,6 @@ async function getProducts(): Promise<Product>{
 } 
 
 export default async function Home() {
-  
   
   
   const {data} = await getProducts()

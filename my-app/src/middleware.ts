@@ -13,7 +13,7 @@ type Decoded = {
 export async function middleware(request: NextRequest) {
     
 //     // console.log(request.url, "<< from middle")
-//     if(request.url.includes('api/products')){
+//     if(request.url.includes('api/whistlists')){
 //         const auth = cookies().get("Authorization");
 //         // console.log(auth, "<< ini auth")
 //         if(!auth) {

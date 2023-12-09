@@ -1,18 +1,49 @@
 "use client"
+import { useEffect, useState } from "react";
 import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
-import { getProducts } from "@/ssr/products";
+// import { getProducts } from "@/ssr/products";
+
+import { listProduct } from "@/db/models/product"
 
 
-export default async function Products() {
-    const { data } = await getProducts()
-    console.log(data, "<<< ada g?")
+type Product = {
+    statusCode?: number;
+    message?: string;
+    data?: listProduct[];
+}
+
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+export default function Products() {
+    // const { data } = await getProducts()
+
+    const [products, setProducts] = useState([])
+
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch(baseUrl + "/api/products", {
+                method: 'GET',
+                cache: 'no-store'
+            })
+            const {data} = await response.json()
+            setProducts(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+    // console.log(products, "<< isinya apa?")
+
 
     return (
         <>
             <NavbarLogin />
             <div className="flex flex-wrap gap-3 justify-around p-6">
-                {data?.map((el, idx) => (
+                {products.map((el, idx) => (
                     <ProductCards products={el} key={idx} />
                 ))}
             </div>
