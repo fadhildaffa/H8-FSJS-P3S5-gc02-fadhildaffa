@@ -8,6 +8,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 import { listProduct } from "@/db/models/product"
+import { ObjectId } from "mongodb";
 
 
 type Product = {
@@ -31,20 +32,20 @@ export default function Products() {
                 method: 'GET',
                 cache: 'no-store'
             })
-      
+
             const result: Product = await response.json();
             const newProducts: listProduct[] = result.data;
-      
+
             setProducts([...products, ...newProducts]);
             if (products.length == 21) {
                 setScroll(false);
-              } else {
+            } else {
                 setPage(page + 1);
-              }
-            
-          } catch (error) {
+            }
+
+        } catch (error) {
             console.error('Error fetching data:', error);
-          }
+        }
     }
 
 
@@ -63,10 +64,26 @@ export default function Products() {
         }
     }
 
+    const addWhislist = async (payload: string) => {
+        const productId: (string) = payload;
+
+        // console.log(productId, 'INI DI SERVER HALAMAN')
+        await fetch(`${baseUrl}/api/whistlists`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    productId
+                }),
+            }
+        );
+        
+    }
     useEffect(() => {
         fetchProducts()
     }, [])
-
     // console.log(products, "<< isinya apa?")
 
 
@@ -118,13 +135,13 @@ export default function Products() {
                     endMessage={<div className="flex flex-wrap gap-3 justify-around p-6"><p>end of page</p></div>}
                     scrollableTarget='parentScrollDiv'
                 >
-                     <div className="flex flex-wrap gap-3 justify-around p-6">
-                    {products.map((el, idx) => (
-                        <ProductCards products={el} key={idx} />
-                    ))}
+                    <div className="flex flex-wrap gap-3 justify-around p-6">
+                        {products.map((el, idx) => (
+                            <ProductCards addWhislist={addWhislist} products={el} key={idx} />
+                        ))}
                     </div>
                 </InfiniteScroll>
-                </div>
+            </div>
 
 
         </>

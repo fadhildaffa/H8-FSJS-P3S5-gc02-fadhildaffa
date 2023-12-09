@@ -1,4 +1,5 @@
 'use client'
+import { ObjectId } from "mongodb";
 import Link from "next/link"
 import { FaMagnifyingGlass, FaHeart, FaRegHeart, FaArrowRight } from "react-icons/fa6";
 
@@ -16,10 +17,11 @@ type Props = {
     images: string[];
     createdAt: string;
     updatedAt: string;
-  }
+  },
+  addWhislist: any
 }
 
-export default function ProductCards({ products }: Props) {
+export default function ProductCards({ products, addWhislist }: Props) {
   // console.log(products, "<<< boleh")
   const rupiah = (number: any): any => {
     return new Intl.NumberFormat("id-ID", {
@@ -41,14 +43,16 @@ export default function ProductCards({ products }: Props) {
 
     return format
   }
-
+  const handleAddWhislist: any = async (productId: ObjectId) => {
+    await addWhislist(productId);
+  }
 
 
   return (
     <>
       <div className="card w-96 bg-base-100 shadow-xl border border-zinc-500 p-3 relative">
-        <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2">
-          <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
+        <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2" onClick={() => handleAddWhislist(products._id)}>
+          <FaRegHeart size={30} color={"black"}/>
         </div>
         <Link href={`/products/${products.slug}`}>
           <figure><img src={products.thumbnail} alt={products.name} style={{ height: "15em" }} /></figure>
@@ -64,7 +68,7 @@ export default function ProductCards({ products }: Props) {
           </div>
         </Link>
       </div>
-      
+
     </>
   )
 }

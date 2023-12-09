@@ -56,9 +56,9 @@ export default async function Home() {
         </div>
       </div>
       <div className="flex flex-wrap gap-5 justify-between p-6">
-        {data?.map((el, idx) =>(
+        {/* {data?.map((el, idx) =>(
           <ProductCards products={el} key={idx} />
-        ))}
+        ))} */}
       </div>
       <div className="flex justify-center p-5">
         <Link href="/products">

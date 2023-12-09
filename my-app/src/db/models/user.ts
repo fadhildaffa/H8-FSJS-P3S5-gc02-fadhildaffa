@@ -42,9 +42,6 @@ export const getByEmailAndUsername = async (email: string, username: string) => 
         { username }]
     }).toArray()) as userModel[];
 
-    // const userUsername = (await db.collection(COLLECTION_USER).findOne({
-    //     username: username
-    // })) as userModel;
 
     return user
 }
