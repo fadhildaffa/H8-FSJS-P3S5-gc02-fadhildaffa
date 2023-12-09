@@ -1,9 +1,7 @@
-
-import Image from "next/image"
 import Link from 'next/link'
 import ProductCards from "./components/ProductCard"
 import { listProduct } from "@/db/models/product"
-import { cookies } from "next/headers"
+import NavbarLogin from "./components/NavbarLogin"
 
 type Product = {
   statusCode?: number;
@@ -11,11 +9,11 @@ type Product = {
   data?: listProduct[] 
 }
 
-let baseUrl = process.env.BASE_URL as string
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 async function getProducts(): Promise<Product>{
   'use server'
-  const response = await fetch(baseUrl + "/api/products?limit=7", {
+  const response = await fetch(baseUrl + "/api/products?limit=7&search=", {
     method: 'GET',
     cache: 'no-store'
   })
@@ -25,8 +23,7 @@ async function getProducts(): Promise<Product>{
 } 
 
 export default async function Home() {
-  
-  
+ 
   
   const {data} = await getProducts()
   // console.log(data, "<<< ini data")
@@ -34,36 +31,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="navbar bg-gray-100">
-        <div>
-          <div className="flex-1 pl-4">
-            <Link href="/">
-              <Image src="/images/logoC02.png" alt="cOlx" width={50} height={50} />
-            </Link>
-          </div>
-        </div>
-        <div className="flex justify-center content-center w-screen gap-4">
-          <input type="text" placeholder="Search" className="input input-bordered w-6/12" />
-          <div className="border-solid border-2 border-zinc-950 rounded-full">
-            <Image src="/images/search.png" alt="cOlx" width={35} height={35} />
-          </div>
-          <h3 className="font-bold underline text-sky-400">
-            E-commerce Info
-          </h3>
-        </div>
-        <div className="gap-5 mr-10">
-          <h3 className="font-bold underline" >
-            <Link href="/login">
-              Login
-            </Link>
-          </h3>
-          <h3 className="font-bold underline">
-            <Link href="/register">
-              Daftar
-            </Link>
-          </h3>
-        </div>
-      </div>
+      <NavbarLogin />
       <div className="carousel w-full">
         <div id="slide1" className="carousel-item relative w-full">
           <img src="https://res.cloudinary.com/dlqcki8m5/image/upload/v1701834106/frcfhtrrzl3rjfqardf2.jpg" className="w-full" style={{ height: "18rem" }} />

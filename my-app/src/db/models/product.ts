@@ -25,11 +25,22 @@ export type listProduct = {
 }
 
 
-export const getProducts = async (limit: string) => {
+export const getProducts = async ({limit, search, page}:{limit: string, search:string, page: any}) => {
+    // console.log(search, "<< from model")
     const db = await getDb();
+    const skip = (Number(page) - 1) * Number(limit);
     const products = (await db.collection('products').aggregate([
         {
+            $match: { name: { $regex: new RegExp(search, "i") } }
+        },
+        {
+            $skip: skip
+        },
+        {
             $limit: Number(limit)
+        },
+        {
+            $sort: { createdAt: -1 }
         }
     ]).toArray()) as listProduct[]
 

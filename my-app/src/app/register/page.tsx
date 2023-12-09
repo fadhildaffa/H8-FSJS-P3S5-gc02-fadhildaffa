@@ -8,7 +8,7 @@ export type myResponse <T = {}> =  {
     data?: T;
 }
 
-let baseUrl = process.env.BASE_URL as string
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 export default function Register() {
 

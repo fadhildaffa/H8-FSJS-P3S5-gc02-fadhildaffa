@@ -1,21 +1,17 @@
 
 import NavbarLogin from "@/app/components/NavbarLogin"
 import { listProduct } from "@/db/models/product"
-import { FaMagnifyingGlass, FaHeart, FaRegHeart, FaArrowRight } from "react-icons/fa6";
-import Link from "next/link";
-import { cookies } from "next/headers";
+import GetDetail from "@/csr/GetDetail";
 type Product = {
     statusCode?: number;
     message?: string;
-    data?: listProduct;
+    data: listProduct;
 }
-let baseUrl = process.env.BASE_URL as string
+
+let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 export default async function DetailPage({ params }: { params: { slug: string } }) {
-    // const { searchParams } = new URL(request.url)
-    // const id = searchParams.get('id')
-    // console.log(params, "<<< ini ada gk?")
-
+   
     async function getProduct(): Promise<Product> {
         'use server'
         const response = await fetch(`${baseUrl}/api/products/${params.slug}`, {
@@ -34,66 +30,17 @@ export default async function DetailPage({ params }: { params: { slug: string } 
             currency: "IDR"
         }).format(number);
     }
-
-
+let formatTags = data.tags.map((el, idx) => {
+    return (
+        <span className='font-bold text-md bg-slate-400 rounded-full px-4 py-1 text-black' key={idx}>{el}</span>
+    )
+})
+// console.log(data, "<<< ini data")
 
     return (
         <>
             <NavbarLogin />
-            <div className="p-5">
-                <div className="carousel w-full" style={{ height: '30em' }}>
-                    <div id="slide1" className="carousel-item relative w-full relative">
-                        <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2">
-                            <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
-                        </div>
-                        <img src={data?.images[0]} className="w-full" />
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide5" className="btn btn-circle">❮</a>
-                            <a href="#slide2" className="btn btn-circle">❯</a>
-                        </div>
-                    </div>
-                    <div id="slide2" className="carousel-item relative w-full">
-                        <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2">
-                            <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
-                        </div>
-                        <img src={data?.images[1]} className="w-full" />
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide1" className="btn btn-circle">❮</a>
-                            <a href="#slide3" className="btn btn-circle">❯</a>
-                        </div>
-                    </div>
-                    <div id="slide3" className="carousel-item relative w-full relative">
-                        <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2">
-                            <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
-                        </div>
-                        <img src={data?.images[2]} className="w-full" />
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide2" className="btn btn-circle">❮</a>
-                            <a href="#slide4" className="btn btn-circle">❯</a>
-                        </div>
-                    </div>
-                    <div id="slide4" className="carousel-item relative w-full relative">
-                        <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2">
-                            <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
-                        </div>
-                        <img src={data?.images[3]} className="w-full" />
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide3" className="btn btn-circle">❮</a>
-                            <a href="#slide5" className="btn btn-circle">❯</a>
-                        </div>
-                    </div>
-                    <div id="slide5" className="carousel-item relative w-full relative">
-                        <div className="border border-white rounded-full bg-white absolute right-0 mr-3 p-2">
-                            <Link href='/whislist'> <FaRegHeart size={30} color={"black"} /></Link>
-                        </div>
-                        <img src={data?.images[4]} className="w-full" />
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide4" className="btn btn-circle">❮</a>
-                            <a href="#slide1" className="btn btn-circle">❯</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <GetDetail image={data?.images} />
             {/* nama dan excerpt */}
             <div className="flex">
                 <div className="flex-auto w-64 pl-4">
@@ -103,6 +50,9 @@ export default async function DetailPage({ params }: { params: { slug: string } 
                     <p>
                         {data?.excerpt}
                     </p>
+                    <div className="flex my-3 gap-4">
+                   {formatTags}
+                    </div>
                     <h2 className="font-bold text-3xl pt-10">
                         Deskripsi
                     </h2>
