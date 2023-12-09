@@ -4,7 +4,8 @@ import Image from "next/image"
 import { useEffect, useState } from "react";
 import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
-// import { getProducts } from "@/ssr/products";
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 import { listProduct } from "@/db/models/product"
 
@@ -12,30 +13,41 @@ import { listProduct } from "@/db/models/product"
 type Product = {
     statusCode?: number;
     message?: string;
-    data?: listProduct[];
+    data: listProduct[];
 }
 type getSearchType = () => any
 let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 export default function Products() {
+    const [products, setProducts] = useState<listProduct[]>([]);
     const [search, setSearch] = useState("")
-    const [products, setProducts] = useState([])
+    const [scroll, setScroll] = useState(true)
+    const [page, setPage] = useState(1);
     // const { data } = await getProducts()
 
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch(baseUrl + "/api/products?search=&limit=", {
+            const response = await fetch(baseUrl + `/api/products?search=${search}&limit=&page=${page}`, {
                 method: 'GET',
                 cache: 'no-store'
             })
-            const { data } = await response.json()
-            setProducts(data)
-        } catch (error) {
-            console.log(error)
-        }
+      
+            const result: Product = await response.json();
+            const newProducts: listProduct[] = result.data;
+      
+            setProducts([...products, ...newProducts]);
+            if (products.length == 21) {
+                setScroll(false);
+              } else {
+                setPage(page + 1);
+              }
+            
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
     }
 
-   
+
     const handleSearch = async () => {
         // const b = formD
         try {
@@ -43,7 +55,7 @@ export default function Products() {
                 method: "GET",
                 cache: "no-store"
             });
-            const {data} = await response.json();
+            const { data } = await response.json();
             setProducts(data)
             // console.log(result, "<<< isi result")
         } catch (error) {
@@ -98,18 +110,22 @@ export default function Products() {
                 </div>
             </div>
             <div className="flex flex-wrap gap-3 justify-around p-6">
-                {products.map((el, idx) => (
-                    <ProductCards products={el} key={idx} />
-                ))}
-            </div>
-            <div className="flex justify-end pr-10 pr-56">
-                <div className="join">
-                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="1" />
-                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
-                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
-                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+                <InfiniteScroll
+                    dataLength={products.length}
+                    next={fetchProducts}
+                    hasMore={scroll}
+                    loader={<><div className="flex flex-wrap gap-3 justify-around p-6"><p>Loading ....</p></div></>}
+                    endMessage={<div className="flex flex-wrap gap-3 justify-around p-6"><p>end of page</p></div>}
+                    scrollableTarget='parentScrollDiv'
+                >
+                     <div className="flex flex-wrap gap-3 justify-around p-6">
+                    {products.map((el, idx) => (
+                        <ProductCards products={el} key={idx} />
+                    ))}
+                    </div>
+                </InfiniteScroll>
                 </div>
-            </div>
+
 
         </>
     )

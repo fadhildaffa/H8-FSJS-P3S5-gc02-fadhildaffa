@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link"
 import { FaMagnifyingGlass, FaHeart, FaRegHeart, FaArrowRight } from "react-icons/fa6";
-import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 type Props = {
   products: {
@@ -30,12 +30,14 @@ export default function ProductCards({ products }: Props) {
 
   let name = products.name.split(" ");
   let formatName: string = `${name[0]} ${name[1]}`;
-    
+
   const changeDate = (date: string): any => {
     const data = new Date(date)
     const day = data.toLocaleString("default", { day: '2-digit' })
     const month = data.toLocaleString("default", { month: 'short' })
-    const format = `${day} ${month}`
+    const year = data.toLocaleString("default", { year: 'numeric' })
+
+    const format = `${day} ${month} ${year}`
 
     return format
   }
@@ -62,6 +64,7 @@ export default function ProductCards({ products }: Props) {
           </div>
         </Link>
       </div>
+      
     </>
   )
 }
