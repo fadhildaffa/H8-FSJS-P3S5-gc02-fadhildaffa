@@ -2,6 +2,7 @@ import Link from 'next/link'
 import ProductCards from "./components/ProductCard"
 import { listProduct } from "@/db/models/product"
 import NavbarLogin from "./components/NavbarLogin"
+import { cookies } from 'next/headers'
 
 type Product = {
   statusCode?: number;
@@ -21,6 +22,31 @@ async function getProducts(): Promise<Product>{
 
   return result
 } 
+const addWhislist = async (payload: string) => {
+  'use server'
+
+  const productId: (string) = payload;
+
+  try {
+  const a = await fetch(`${baseUrl}/api/whistlists`,
+      {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              Cookie: cookies().toString()
+          },
+          body: JSON.stringify({
+              productId
+          }),
+      }
+  );
+  // console.log(a, "<<< ini isinya apa?")
+  if(a.status === 201) return "Add"
+ return "Done"
+  } catch (error) { 
+      // console.log(error, "<< ini errornya")
+  }
+}
 
 export default async function Home() {
  
@@ -56,9 +82,9 @@ export default async function Home() {
         </div>
       </div>
       <div className="flex flex-wrap gap-5 justify-between p-6">
-        {/* {data?.map((el, idx) =>(
-          <ProductCards products={el} key={idx} />
-        ))} */}
+        {data?.map((el, idx) =>(
+          <ProductCards addWhislist={addWhislist} products={el} key={idx} />
+        ))}
       </div>
       <div className="flex justify-center p-5">
         <Link href="/products">

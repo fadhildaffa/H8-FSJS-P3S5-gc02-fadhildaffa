@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
 import { getMongoClientInstance } from "../config";
 import { hashPassword } from "../helpers/bcrypt";
-import exp from "constants";
 
 
 const databaseName = 'cOlx';

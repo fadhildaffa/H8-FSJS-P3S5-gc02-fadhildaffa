@@ -1,35 +1,39 @@
-'use client'
 import Image from "next/image"
 import Link from "next/link"
-import { MouseEvent, MouseEventHandler, useState } from "react"
-import { listProduct } from "@/db/models/product"
-let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-import Products from "../products/page"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+import LogoutBtn from "./LogoutBtn"
+import WhislistButton from "./ProtectingApp"
 
-type Product = {
-    statusCode?: number;
-    message?: string;
-    data?: listProduct[] 
-  }
+
 
 
 export default function NavbarLogin() {
-    const [search, setSearch] = useState("")
-    const handleSearch = async () => {
-        // const b = formD
-        try {
-            const response = await fetch(baseUrl + `/api/products?search=${search}&limit=`, {
-                method: "GET",
-                cache: "no-store"
-            });
-            const {data} = await response.json();
-           
-            // console.log(result, "<<< isi result")
-        } catch (error) {
-            console.log(error)
+    let isLoggingIn;
+    let token = cookies().get("Authorization")
+    // console.log(token, "<< berubah")
+    if (token) {
+        const valid = token.value.split(' ')[1]
+        if (valid) {
+            isLoggingIn = true
+        } else {
+            isLoggingIn = false
         }
+    } else {
+        isLoggingIn = false
     }
-    // console.log(search, "<< berubah")
+ const handleLogout = async () => {
+        "use server"
+        cookies().delete('Authorization')
+        redirect('/')
+    }
+
+    const confirmed = async () => {
+        "use server"
+        redirect('/whislist');
+      }
+   
+
     return (
         <div className="navbar bg-gray-100">
             <div>
@@ -45,14 +49,10 @@ export default function NavbarLogin() {
                     <Image src="/images/search.png" alt="cOlx" width={35} height={35} />
                 </div>
                 <div>
-                    <Link href="/whislist">
-                        <h3 className="text-red-600 font-bold">
-                            Whislist
-                        </h3>
-                    </Link>
+                <WhislistButton isLoggingIn={isLoggingIn} confirmed={confirmed}/>
                 </div>
             </div>
-            <div className="gap-5 mr-10">
+            {isLoggingIn ? <LogoutBtn logout={handleLogout} />: <div className="gap-5 mr-10">
                 <h3 className="font-bold underline" >
                     <Link href="/login">
                         Login
@@ -64,9 +64,7 @@ export default function NavbarLogin() {
                     </Link>
                 </h3>
             </div>
-            <div className="gap-5 mr-10">
-                <button className="btn btn-error">Logout</button>
-            </div>
+            }
         </div>
     )
 }

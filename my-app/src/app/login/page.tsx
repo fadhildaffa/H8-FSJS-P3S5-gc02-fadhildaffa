@@ -32,7 +32,7 @@ export default function Login() {
         if(result.data) cookies().set('Authorization', `Bearer ${result.data.access_token}`)
         // console.log(result, "<<<< ini apa?")
 
-        return redirect("/products")
+        return redirect("/")
     }
 
     return (
