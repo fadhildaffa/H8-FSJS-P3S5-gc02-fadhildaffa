@@ -40,7 +40,7 @@ let formatTags = data.tags.map((el, idx) => {
     return (
         <>
             <NavbarLogin />
-            <GetDetail image={data?.images} />
+            <GetDetail ProductId={data?._id} image={data?.images} />
             {/* nama dan excerpt */}
             <div className="flex">
                 <div className="flex-auto w-64 pl-4">

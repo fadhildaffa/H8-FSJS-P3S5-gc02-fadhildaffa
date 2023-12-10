@@ -42,7 +42,7 @@ export async function POST(request: Request) {
             }
         )
 
-        // response.cookies.set('Authorization', `Bearer ${access_token}`)
+        response.cookies.set('Authorization', `Bearer ${access_token}`)
 
         return response
 
