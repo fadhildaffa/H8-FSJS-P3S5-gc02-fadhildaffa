@@ -10,15 +10,15 @@ export default function Footer() {
                             <span className='text-xl font-bold text-white italic'>Tentang cOlx</span>
                         </div>
                         <p className='text-white pb-4'>
-                            Selamat datang di cOlx – destinasi belanja online terbaik untuk memenuhi kebutuhan Anda! Kami bangga menyajikan koleksi produk berkualitas tinggi yang dirancang untuk memenuhi gaya hidup modern Anda. Dari pakaian fashion hingga peralatan rumah tangga, kami memiliki segala sesuatu yang Anda butuhkan dengan harga yang terjangkau.
+                            Selamat datang di cOlx – tempat terbaik untuk menjelajahi dan menemukan mobil impian Anda! Kami menyediakan koleksi mobil berkualitas tinggi dari berbagai merek terkemuka, memberikan Anda pilihan luas untuk memenuhi kebutuhan dan gaya hidup Anda.
 
-                            Eksplorasi pilihan fashion kami yang treni untuk menemukan gaya yang sesuai dengan kepribadian Anda. Dengan pakaian berkualitas tinggi dan desain terkini, kami menyajikan pilihan yang sempurna untuk segala kesempatan. Tambahkan sentuhan akhir dengan aksesori kami yang elegan dan selesaikan tampilan Anda dengan sentuhan yang istimewa.
+                            Temukan pengalaman berbelanja mobil yang nyaman dan andal di cOlx. Dari mobil keluarga yang aman dan nyaman hingga mobil sport yang memikat hati, kami memiliki berbagai opsi yang sesuai dengan preferensi Anda. Semua mobil yang kami tawarkan telah melewati pemeriksaan kualitas ketat, sehingga Anda dapat memiliki keyakinan bahwa setiap pembelian adalah investasi yang cerdas.
 
-                            Kami juga menawarkan berbagai peralatan rumah tangga yang inovatif dan fungsional. Dari perabotan hingga perlengkapan dapur, produk-produk kami dirancang untuk mempermudah hidup sehari-hari Anda. Kualitas tinggi dan daya tahan menjadi prioritas utama kami, sehingga Anda dapat yakin bahwa setiap pembelian di cOlx adalah investasi yang baik.
+                            Kami memahami bahwa keamanan dan kenyamanan Anda adalah prioritas utama. Oleh karena itu, kami menyediakan informasi rinci mengenai setiap mobil, termasuk fitur keselamatan dan spesifikasi teknis, sehingga Anda dapat membuat keputusan yang cerdas sebelum membeli. Tim ahli kami juga siap membantu Anda dengan pertanyaan atau bantuan teknis kapan pun diperlukan.
 
-                            Keamanan dan kepuasan pelanggan adalah fokus utama kami. Kami menawarkan layanan pengiriman yang cepat dan andal, serta kebijakan pengembalian yang fleksibel. Tim dukungan pelanggan kami siap membantu Anda setiap saat untuk memastikan pengalaman belanja online Anda berjalan lancar.
+                            Proses pembelian di cOlx sangat mudah dan transparan. Anda dapat dengan nyaman menjelajahi pilihan mobil kami, membandingkan fitur, dan bahkan menjadwalkan tes drive secara online. Kami juga menawarkan berbagai opsi pembiayaan yang dapat disesuaikan dengan kebutuhan keuangan Anda.
 
-                            Nikmati pengalaman belanja online yang menyenangkan dan praktis di cOlx. Temukan produk unggulan kami dan temukan keindahan dan fungsionalitas dalam setiap pembelian. Terima kasih telah memilih cOlx sebagai destinasi belanja online Anda. Selamat berbelanja!
+                            Dengan pengiriman yang dapat diandalkan dan layanan pelanggan yang responsif, kami berkomitmen untuk membuat pengalaman belanja mobil online Anda menyenangkan dan tanpa hambatan. cOlx hadir untuk membantu Anda mewujudkan impian memiliki mobil baru. Selamat berbelanja dan temukan perjalanan baru Anda di jalan raya bersama kami!
                         </p>
 
                     </div>

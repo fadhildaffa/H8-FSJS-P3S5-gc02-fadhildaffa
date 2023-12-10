@@ -17,6 +17,7 @@ try {
     const auth = cookies().get("Authorization");
     // console.log(auth, "<< ini auth")
     if(!auth) {
+      
       return NextResponse.json(
         {
           message: "Unauthenticated"

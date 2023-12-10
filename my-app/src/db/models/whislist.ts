@@ -24,7 +24,7 @@ export type mineWhislist = {
     name: string;
     username: string;
     email: string;
-    myWhislists: listProduct[]
+    wishlists: listProduct[]
 }
 
 type userAddWhislist = Omit<userWhislist, "_id">;
@@ -87,16 +87,17 @@ export const getWhislists = async (userId: string ) => {
                             },
                             as: "wishlist",
                             in: {
-                                _id: "$$wishlist._id",
-                                name: "$$wishlist.name",
-                                slug: "$$wishlist.slug",
-                                description: "$$wishlist.description",
-                                excerpt: "$$wishlist.excerpt",
-                                tags: "$$wishlist.tags",
-                                thumbnail: "$$wishlist.thumbnail",
-                                images: "$$wishlist.images",
-                                createdAt: "$$wishlist.createdAt",
-                                updatedAt: "$$wishlist.updatedAt",
+                                _id: { $arrayElemAt: ["$$wishlist._id", 0] },
+                                name: { $arrayElemAt: ["$$wishlist.name", 0] },
+                                price: { $arrayElemAt: ["$$wishlist.price", 0] },
+                                slug: { $arrayElemAt: ["$$wishlist.slug", 0] },
+                                description: { $arrayElemAt: ["$$wishlist.description", 0] },
+                                excerpt: { $arrayElemAt: ["$$wishlist.excerpt", 0] },
+                                tags: { $arrayElemAt: ["$$wishlist.tags", 0] },
+                                thumbnail: { $arrayElemAt: ["$$wishlist.thumbnail", 0] },
+                                images: { $arrayElemAt: ["$$wishlist.images", 0] },
+                                createdAt: { $arrayElemAt: ["$$wishlist.createdAt", 0] },
+                                updatedAt: { $arrayElemAt: ["$$wishlist.updatedAt", 0] }
                             }
                         }
                     }

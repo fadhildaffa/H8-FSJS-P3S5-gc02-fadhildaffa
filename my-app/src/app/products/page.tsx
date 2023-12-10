@@ -2,13 +2,10 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react";
-import NavbarLogin from "../components/NavbarLogin"
 import ProductCards from "../components/ProductCard"
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-
 import { listProduct } from "@/db/models/product"
-import { ObjectId } from "mongodb";
+import Swal from 'sweetalert2'
 
 
 type Product = {
@@ -16,16 +13,18 @@ type Product = {
     message?: string;
     data: listProduct[];
 }
-type getSearchType = () => any
+
 let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 export default function Products() {
+    
+
     const [products, setProducts] = useState<listProduct[]>([]);
     const [search, setSearch] = useState("")
     const [scroll, setScroll] = useState(true)
     const [page, setPage] = useState(1);
     // const { data } = await getProducts()
 
-
+    
     const fetchProducts = async () => {
         try {
             const response = await fetch(baseUrl + `/api/products?search=${search}&limit=&page=${page}`, {
@@ -67,8 +66,8 @@ export default function Products() {
     const addWhislist = async (payload: string) => {
         const productId: (string) = payload;
 
-        // console.log(productId, 'INI DI SERVER HALAMAN')
-        await fetch(`${baseUrl}/api/whistlists`,
+        try {
+         const add =  await fetch(`${baseUrl}/api/whistlists`,
             {
                 method: "POST",
                 headers: {
@@ -79,6 +78,39 @@ export default function Products() {
                 }),
             }
         );
+        if(add.status === 401) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please Loggin First',
+                icon: 'error',
+                confirmButtonText: 'OK'
+              })
+        }else if (add.status === 201){
+                Swal.fire({
+                  title: 'Success',
+                  text: 'Added to Whislist',
+                  icon: 'success',
+                  confirmButtonText: 'OK'
+                })
+        }else if (add.status === 200){
+            Swal.fire({
+                title: 'Success',
+                text: 'Success remove from whislist',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              })
+        }
+        
+        } catch (error) {
+            
+            Swal.fire({
+                title: 'Error!',
+                text: `${error}`,
+                icon: 'error',
+                confirmButtonText: 'OK'
+              })
+        }
+        
         
     }
     useEffect(() => {
